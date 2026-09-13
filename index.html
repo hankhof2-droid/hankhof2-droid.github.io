@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hank's Texas Food Tour</title>
+<meta name="description" content="One Texan, driving the whole state, ranking every plate of BBQ, burgers, and more.">
+
+<style>
+  /* ============================================================
+     COLOR & TYPE SYSTEM
+     Change these values to re-theme the whole site at once.
+     ============================================================ */
+  :root{
+    --asphalt: #2B2A28;   /* dark road-grey, used for header/footer */
+    --paper:   #F1E9D6;   /* sun-bleached cream, main background */
+    --paper-2: #E8DDBF;   /* slightly darker card background */
+    --ink:     #211D19;   /* body text */
+    --barn:    #A32F2A;   /* barn-door red, primary accent */
+    --highway: #E8B33D;   /* road-line yellow, secondary accent */
+    --sage:    #5B6B45;   /* road-sign green, tertiary accent */
+    --line:    #C9BC98;   /* hairline borders */
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+  }
+
+  h1,h2,h3{
+    font-family:'Oswald',sans-serif;
+    line-height:1.1;
+    letter-spacing:0.2px;
+  }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  header{
+    background:var(--asphalt);
+    color:var(--paper);
+    padding:14px 0;
+    border-bottom:4px solid var(--highway);
+  }
+  header .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .brand{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.3px;
+  }
+  nav a{
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    color:var(--paper);
+    margin-left:22px;
+    opacity:0.85;
+  }
+  nav a:hover{ opacity:1; }
+
+  /* ============================================================
+     HERO
+     One bold moment: the headline + the live "on the road" line.
+     ============================================================ */
+  .hero{
+    padding:64px 0 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero h1{
+    font-size:clamp(36px, 6vw, 58px);
+    font-weight:700;
+    max-width:14ch;
+    color:var(--ink);
+  }
+  .hero h1 span{ color:var(--barn); }
+  .hero p{
+    margin-top:18px;
+    font-size:17px;
+    max-width:46ch;
+    color:#4A443C;
+  }
+  .hero-cta{
+    margin-top:28px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:12px 20px;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    text-decoration:none;
+    border-radius:2px;
+  }
+  .btn-primary{
+    background:var(--barn);
+    color:var(--paper);
+  }
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    border:1.5px solid var(--ink);
+  }
+
+  /* Currently on the road strip */
+  .on-the-road{
+    margin-top:40px;
+    padding:16px 18px;
+    background:var(--asphalt);
+    color:var(--paper);
+    border-radius:2px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .on-the-road .tag{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    color:var(--highway);
+    font-size:13px;
+  }
+  .on-the-road .stop{ font-size:15px; }
+  .on-the-road .score{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    color:var(--highway);
+  }
+
+  /* ============================================================
+     RANKINGS PREVIEW
+     Five cuisine cards, each a small roadside-plaque shape.
+     ============================================================ */
+  .rankings{ padding:56px 0; }
+  .rankings h2{
+    font-size:28px;
+    margin-bottom:6px;
+  }
+  .rankings > .wrap > p{
+    color:#4A443C;
+    margin-bottom:32px;
+    max-width:52ch;
+  }
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:16px;
+  }
+  .cuisine-card{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:5px solid var(--barn);
+    padding:18px 16px;
+  }
+  .cuisine-card.burger{ border-left-color:var(--sage); }
+  .cuisine-card.mexican{ border-left-color:#C77B3E; }
+  .cuisine-card.italian{ border-left-color:#7A8F5A; }
+  .cuisine-card.asian{ border-left-color:#7A5FA0; }
+  .cuisine-card h3{
+    font-size:16px;
+    margin-bottom:10px;
+  }
+  .cuisine-card .top-pick{
+    font-size:14px;
+    font-weight:500;
+  }
+  .cuisine-card .top-pick .name{ display:block; margin-bottom:2px; }
+  .cuisine-card .top-pick .place{ color:#5C5548; font-size:13px; }
+
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  .about{
+    padding:56px 0;
+    border-top:1px solid var(--line);
+  }
+  .about .wrap{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+    max-width:700px;
+  }
+  .about h2{ font-size:26px; }
+  .about p{ margin-top:14px; color:#4A443C; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    background:var(--asphalt);
+    color:var(--paper);
+    padding:32px 0;
+    margin-top:20px;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  footer .social a{
+    text-decoration:none;
+    color:var(--paper);
+    margin-left:18px;
+    font-size:14px;
+    font-weight:500;
+  }
+  footer .fine{
+    font-size:13px;
+    color:#B8AF9F;
+  }
+
+  @media (max-width: 560px){
+    nav a{ margin-left:14px; font-size:13px; }
+    .hero{ padding:44px 0 36px; }
+    footer .wrap{ flex-direction:column; align-items:flex-start; }
+    footer .social a{ margin-left:0; margin-right:16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============================================================
+       EDIT ME: swap "Hank" for whatever channel/brand name you land on.
+       ============================================================ -->
+  <header>
+    <div class="wrap">
+      <div class="brand">Hank's Texas Food Tour</div>
+      <nav>
+        <a href="#rankings">Rankings</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>One Texan. Every county.<br><span>Every plate, ranked.</span></h1>
+      <p>Driving around Texas one restaurant at a time, rating BBQ, burgers, Mexican, Italian, and Asian food so you know exactly where to stop next.</p>
+      <div class="hero-cta">
+        <!-- EDIT ME: replace # with your actual TikTok/YouTube URLs once live -->
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Watch on TikTok</a>
+        <a class="btn btn-secondary" href="#" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+
+      <!-- EDIT ME: update this line after every trip -->
+      <div class="on-the-road">
+        <span class="tag">Latest stop</span>
+        <span class="stop">Bar-A-BBQ, Montgomery, TX</span>
+        <span class="score">9.1 / 10</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="rankings" id="rankings">
+    <div class="wrap">
+      <h2>Current top picks</h2>
+      <p>A running scoreboard, one category at a time. Full rankings live in the tracker — this is just the current leaders.</p>
+
+      <!-- EDIT ME: update names/scores as your rankings change -->
+      <div class="card-grid">
+        <div class="cuisine-card bbq">
+          <h3>BBQ</h3>
+          <div class="top-pick">
+            <span class="name">Bar-A-BBQ</span>
+            <span class="place">Montgomery, TX &middot; 9.1</span>
+          </div>
+        </div>
+        <div class="cuisine-card burger">
+          <h3>Burgers</h3>
+          <div class="top-pick">
+            <span class="name">Smashed Society</span>
+            <span class="place">Montgomery, TX &middot; 8.7</span>
+          </div>
+        </div>
+        <div class="cuisine-card mexican">
+          <h3>Mexican</h3>
+          <div class="top-pick">
+            <span class="name">Fajita Jacks</span>
+            <span class="place">Montgomery, TX &middot; 8.9</span>
+          </div>
+        </div>
+        <div class="cuisine-card italian">
+          <h3>Italian</h3>
+          <div class="top-pick">
+            <span class="name">Amalfi Taste</span>
+            <span class="place">Montgomery, TX &middot; 9.0</span>
+          </div>
+        </div>
+        <div class="cuisine-card asian">
+          <h3>Asian</h3>
+          <div class="top-pick">
+            <span class="name">WO Sushi Fusion</span>
+            <span class="place">Montgomery, TX &middot; 8.8</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <h2>About the tour</h2>
+      <!-- EDIT ME: swap this for your own bio -->
+      <p>Retired and finally putting the road trips to good use. I'm driving around Texas, starting in Montgomery County and working outward, rating every BBQ joint, burger stand, and taqueria I stop at. Eventually the plan is to push out into Oklahoma, Louisiana, El Paso, and Brownsville too.</p>
+      <p>No sponsorships, no fluff &mdash; just an honest scorecard from someone who's eaten a lot of brisket.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fine">&copy; 2026 Hank's Texas Food Tour</div>
+      <div class="social">
+        <!-- EDIT ME: same links as the hero buttons above -->
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
