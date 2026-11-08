@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hank's Texas Food Tour</title>
 <meta name="description" content="One Texan, driving the whole state, ranking every plate of BBQ, burgers, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 
 <style>
   /* ============================================================
@@ -24,8 +26,6 @@
   }
 
   *{ box-sizing:border-box; margin:0; padding:0; }
-
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
   body{
     background:var(--paper);
@@ -190,6 +190,40 @@
   .cuisine-card .top-pick .place{ color:#5C5548; font-size:13px; }
 
   /* ============================================================
+     REVIEWS
+     One card per restaurant: name + score on top, review below.
+     ============================================================ */
+  .reviews{ padding:8px 0 56px; }
+  .reviews h2{ font-size:28px; margin-bottom:6px; }
+  .reviews > .wrap > p{ color:#4A443C; margin-bottom:24px; max-width:60ch; }
+  .review-card{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:5px solid var(--sage);
+    padding:20px 18px;
+    margin-bottom:16px;
+  }
+  .review-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .review-card h3{ font-size:22px; }
+  .review-card .big-score{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:26px;
+    color:var(--barn);
+  }
+  .review-card .meta{ color:#5C5548; font-size:14px; margin-top:4px; }
+  .review-card .order{ margin-top:12px; font-size:15px; }
+  .review-card .order b{ font-family:'Oswald',sans-serif; font-weight:600; color:var(--barn); margin-right:6px; }
+  .review-card .text{ margin-top:8px; max-width:65ch; }
+  .review-card .subs{ margin-top:10px; font-size:13px; color:#5C5548; }
+
+  /* ============================================================
      ABOUT
      ============================================================ */
   .about{
@@ -251,6 +285,7 @@
       <div class="brand">Hank's Texas Food Tour</div>
       <nav>
         <a href="#rankings">Rankings</a>
+        <a href="#reviews">Reviews</a>
         <a href="#about">About</a>
       </nav>
     </div>
@@ -268,8 +303,8 @@
       <!-- EDIT ME: update this line after every trip -->
       <div class="on-the-road">
         <span class="tag">Latest stop</span>
-        <span class="stop">Madame Brioche Bistro, Conroe, TX</span>
-        <span class="score">8.9 / 10</span> 
+        <span class="stop">Lankford's Legendary Burgers, The Woodlands, TX</span>
+        <span class="score">9.0 / 10</span>
       </div>
     </div>
   </section>
@@ -290,8 +325,8 @@
         <div class="cuisine-card burger">
           <h3>Burgers</h3>
           <div class="top-pick">
-            <span class="name">Madame Brioche Bistro</span>
-            <span class="place"> Conroe, TX &middot; 8.9</span>
+            <span class="name">Lankford's Legendary Burgers</span>
+            <span class="place"> The Woodlands, TX &middot; 9.0</span>
           </div>
         </div>
         <div class="cuisine-card mexican">
@@ -316,6 +351,35 @@
     </div>
   </section>
 
+  <!-- EDIT ME: add a new review-card for every stop. Highest score goes first. -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <h2>Burger reviews</h2>
+      <p>Every stop gets four scores out of 10: Flavor, Value, Vibe, and Worth the drive. The big number is the overall Hank Score.</p>
+
+      <article class="review-card">
+        <div class="review-top">
+          <h3>Lankford's Legendary Burgers</h3>
+          <span class="big-score">9.0 / 10</span>
+        </div>
+        <div class="meta">24 Waterway Ave, Ste 160, The Woodlands, TX 77380 &middot; Burger about $15</div>
+        <p class="order"><b>Order this</b>Firehouse Burger and the tallow fries</p>
+        <p class="text">The Houston burger legend now has a spot on The Woodlands Waterway. The Firehouse Burger brings the heat with habanero mustard, cayenne butter, and jalape&ntilde;os. Heads up: it is very hot, and next time I'm ordering one without the extreme heat. The tallow fries were sensational, a 9.5 on their own. The wait staff was very friendly and helpful, and about $15 for a burger this good is a fair deal. Grab a pour card and pick from more than 15 craft beers. Worth the drive? Yes.</p>
+        <div class="subs">Flavor 9 &middot; Value 9 &middot; Vibe 9 &middot; Worth the drive 9</div>
+      </article>
+
+      <article class="review-card">
+        <div class="review-top">
+          <h3>Madame Brioche Bistro</h3>
+          <span class="big-score">8.9 / 10</span>
+        </div>
+        <div class="meta">2400 FM 1488 Rd, Conroe, TX 77384</div>
+        <p class="order"><b>Order this</b>The burger, beer-battered fries, and save room for the butter rolls</p>
+        <p class="text">My first burger stop on the tour, at a French-American bistro on FM 1488 near The Woodlands. It's run by David and Suzanne Partouche, who are the real deal from France. The beer-battered fries are great. The real surprise was the free homemade butter rolls they bring to the table. Those were a perfect 10.</p>
+      </article>
+    </div>
+  </section>
+
   <section class="about" id="about">
     <div class="wrap">
       <h2>About the tour</h2>
@@ -336,4 +400,4 @@
   </footer>
 
 </body>
-</html
+</html>
